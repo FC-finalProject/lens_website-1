@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import deleteIcon from '../../static/img/VectordeleteIcon.png';
 
 export default function LoginInputField(props) {
-  const { name, value, setValue, setFocused, focused } = props;
+  const { name, value, setValue, setFocused, focused, onEnterPressed } = props;
   return (
     <div>
       <InputField
@@ -13,6 +13,7 @@ export default function LoginInputField(props) {
         onFocus={() => {
           setFocused(true);
         }}
+        onKeyUp={(e) => (e.key === 'Enter' ? onEnterPressed() : null)}
       />
       <DeleteBtn
         onClick={() => {

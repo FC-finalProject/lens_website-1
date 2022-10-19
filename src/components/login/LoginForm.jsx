@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Button from './Button';
@@ -9,6 +10,19 @@ export default function LoginForm() {
   const [isIdOnFocus, setIsIdOnFoucs] = useState(false);
   const [isPwOnFocus, setIsPwOnFoucs] = useState(false);
   const [validty, setValidty] = useState(true);
+  // 로그인 요청 함수
+  const requestLogin = () => {
+    const url = '/login';
+    const header = { 'Content-Type': 'application/json' };
+    const data = JSON.stringify({
+      loginId: id,
+      password: pw,
+    });
+    axios
+      .post(url, data, { headers: header })
+      .then((response) => (window.location.href = '/'))
+      .catch((err) => console.log(`Error Occured : ${err}`));
+  };
 
   useEffect(() => {
     console.log('working');
@@ -16,7 +30,7 @@ export default function LoginForm() {
   }, [id, pw]);
 
   return (
-    <form method="post">
+    <div>
       <InputBox>
         <label>아이디</label>
         <LoginInputField
@@ -25,6 +39,7 @@ export default function LoginForm() {
           setValue={setId}
           focused={isIdOnFocus}
           setFocused={setIsIdOnFoucs}
+          onEnterPressed={requestLogin}
         />
       </InputBox>
       <InputBox>
@@ -35,11 +50,15 @@ export default function LoginForm() {
           setValue={setPw}
           focused={isPwOnFocus}
           setFocused={setIsPwOnFoucs}
+          onEnterPressed={requestLogin}
         />
       </InputBox>
 
-      <Button infor={{ text: '로그인', disabled: validty }} />
-    </form>
+      <Button
+        infor={{ text: '로그인', disabled: validty }}
+        onClick={requestLogin}
+      />
+    </div>
   );
 }
 
