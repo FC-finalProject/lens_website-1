@@ -1,14 +1,23 @@
 # Lens Website Renewal
 
-- GlobalStyle.js
-  https://meyerweb.com/eric/tools/css/reset/ 내용 그대로 사용
-  css 리셋 관련 의논 후 수정 또는 삭제하는 것을 제안함!
+일본인 대상의 렌즈 구매 웹사이트 리뉴얼
 
-  // console.log(typeof id);
-  // useEffect(() => {
-  // axios.get('/api/v1/product').then((data) => {
-  // setProduct(data.data.data.find((product) => product.id === parseInt(id)));
-  // });
-  // }, [id]);
+## 구현한 페이지
 
-  // console.log(product);
+- 메인페이지
+- 제품 리스트 페이지
+- 제품 상세 페이지
+- 회원가입 페이지
+- 로그인 페이지
+- 마이 페이지
+
+## 구현한 기능
+
+- 회원가입/ 로그인/ 로그아웃
+- 제품 리스트, 상세 페이지로 이동
+
+## 앞으로 더 하고 싶은 기능
+
+- 장바구니
+- 유저 정보 변경
+- 구매
