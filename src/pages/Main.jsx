@@ -10,6 +10,7 @@ import MainSlide from '../components/main/MainSlide';
 import PickupItem from '../components/main/PickupItem';
 import Notice from '../components/main/Notice';
 import { Link } from 'react-router-dom';
+import Tag from '../components/main/Tag';
 
 function Main() {
   const { data, isLoading } = useGetProducts();
@@ -34,6 +35,13 @@ function Main() {
         <FilterMenu />
         <MenuHr />
       </div>
+      <Index>
+        <Grid>
+          {data.data.data
+            .map((product, index) => <Tag index={index + 1} />)
+            .splice(0, 15)}
+        </Grid>
+      </Index>
       <AllLens>
         {data.data.data
           ?.map((product) => {
@@ -129,5 +137,20 @@ const PickLens = styled.div`
 
 const StyledLink = styled(Link)`
   text-decoration: none;
+`;
+
+const Index = styled.div`
+  position: absolute;
+  margin-top: 40px;
+  z-index: 8;
+`;
+
+const Grid = styled.div`
+  margin: 0 10.4vw 16px 10.4vw;
+  display: grid;
+  grid-template-columns: repeat(5, 220px);
+  grid-column-gap: 25px;
+  grid-row-gap: 390px;
+  justify-content: center;
 `;
 export default Main;
