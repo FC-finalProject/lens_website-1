@@ -1,15 +1,17 @@
 import React from 'react';
 import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 import styled from 'styled-components';
 import { useLogout } from '../api/loginApi';
 import { useGetUserInfor } from '../api/userApi';
+import { setLogIn } from '../store/loginInfor';
 import Button from '../components/login/Button';
 
 export default function MyPage() {
   const isLogin = useSelector((state) => state.isLogin);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { status, error, data } = useGetUserInfor();
   //useMutation 공부해서 사용해봅시다
   // const {
@@ -36,31 +38,19 @@ export default function MyPage() {
         <>
           '로그인에 성공하셨습니다.'
           {console.log(data.data.data)}
+          <Buttons>
+            <Button
+              text="로그아웃"
+              onClick={() => {
+                const { data } = refetch();
+                console.log(data);
+                dispatch(setLogIn({ login: false }));
+                navigate('/');
+              }}
+            ></Button>
+            <Button text="회원 정보 수정"></Button>
+          </Buttons>
         </>
-        // <PageContent>
-        //   <div>닉네임: {data.data.data.username}</div>
-        //   <div>
-        //     성별:{' '}
-        //     {data.data.data.gender === 'X'
-        //       ? 'Not chosen'
-        //       : data.data.data.gender === 'F'
-        //       ? 'Female'
-        //       : 'Male'}
-        //   </div>
-        //   <div>생일: {data.data.data.birthday}</div>
-        //   <div>전화번호: {data.data.data.phone}</div>
-        //   <div>가입날짜: {data.data.data.joinedAt}</div>
-        //   <Buttons>
-        //     <Button
-        //       text="로그아웃"
-        //       onClick={() => {
-        //         const { data } = refetch();
-        //         console.log(data);
-        //       }}
-        //     ></Button>
-        //     <Button text="회원 정보 수정"></Button>
-        //   </Buttons>
-        // </PageContent>
       )}
     </PageWrapper>
   );
