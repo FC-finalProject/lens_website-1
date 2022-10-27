@@ -118,30 +118,28 @@ const Container = styled.div`
   width: 40%;
   height: auto;
   float: right;
-  font-family: 'Noto Sans JP';
   font-style: normal;
   .p1 {
-    font-weight: 400; 'Noto Sans JP';
+    font-weight: 400;
     font-size: 30px;
     line-height: 48px;
     letter-spacing: -0.016em;
-
   }
-.price {
+  .price {
     color: red;
     font-weight: 300;
     font-size: 24px;
     line-height: 38px;
     letter-spacing: -0.016em;
   }
-  .円{
+  .円 {
     font-weight: 400;
     font-size: 30px;
     line-height: 38px;
     letter-spacing: -0.016em;
     color: #171717;
   }
-  `;
+`;
 const Commonspan = styled.span`
   font-weight: 500;
   font-size: 20px;
