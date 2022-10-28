@@ -6,6 +6,9 @@ function Tag({ index }) {
 }
 
 const TagDiv = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
   display: flex;
   align-items: center;
   flex-direction: row;

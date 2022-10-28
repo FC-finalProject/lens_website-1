@@ -35,17 +35,17 @@ function Main() {
         <FilterMenu />
         <MenuHr />
       </div>
-      <Index>
-        <Grid>
-          {data.data.data
-            .map((product, index) => <Tag index={index + 1} />)
-            .splice(0, 15)}
-        </Grid>
-      </Index>
+      {/*<Index>*/}
+      {/*  <Grid>*/}
+      {/*    {data.data.data*/}
+      {/*      .map((product, index) => <Tag index={index + 1} />)*/}
+      {/*      .splice(0, 15)}*/}
+      {/*  </Grid>*/}
+      {/*</Index>*/}
       <AllLens>
         {data.data.data
-          ?.map((product) => {
-            return <LensItem key={product.id} {...product} />;
+          ?.map((product, index) => {
+            return <LensItem key={product.id} {...product} index={index} />;
           })
           .splice(0, 15)}
       </AllLens>

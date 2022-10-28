@@ -2,8 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import Star from '../../static/img/Star.png';
+import Tag from '../main/Tag';
 
-function LensItem(product) {
+function LensItem({index, ...product}) {
   return (
     <Itemdiv key={product.id}>
       <StyledLink to={`/itemdetail/${product.id}`}>
@@ -25,6 +26,7 @@ function LensItem(product) {
         <StyledTagDiv>おすすめ</StyledTagDiv>
         <StyledTagDiv>おすすめ</StyledTagDiv>
       </StyledStars>
+      <Tag index={index} />
     </Itemdiv>
   );
 }
@@ -99,6 +101,7 @@ const StyledTagDiv = styled.div`
 const Itemdiv = styled.div`
   height: 330px;
   margin: 40px 0px;
+  position: relative;
 `;
 
 export default LensItem;
