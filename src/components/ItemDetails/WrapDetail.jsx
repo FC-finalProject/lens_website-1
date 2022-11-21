@@ -169,17 +169,17 @@ const Bestbtn = styled(Suggestionbtn)`
 `;
 
 const Graphicdiameterbtn = styled.button`
-  
   width: 86px;
   height: 42px;
   background: #ffffff;
   border: 1px solid #d3d6db;
   border-radius: 4px;
   cursor: pointer;
-  type='button' 
   opacity: 1;
   transition: 0.3s;
-  :hover {opacity: 0.5}
+  :hover {
+    opacity: 0.5;
+  }
 `;
 
 const ResultPrice = styled.div`
