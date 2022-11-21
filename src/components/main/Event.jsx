@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import TitleName from './TitleName';
 import EventSlide from './EventSlide';
+
 function Event() {
   return (
     <>

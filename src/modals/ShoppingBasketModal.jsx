@@ -1,5 +1,4 @@
 import React from 'react';
-// import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 function ShoppingBasketModal({ open, onClose }) {
@@ -17,12 +16,6 @@ function ShoppingBasketModal({ open, onClose }) {
             <div>
               <Confirmbtn onClick={onClose}>확인</Confirmbtn>
             </div>
-            &nbsp;&nbsp;
-            {/* <div>
-              <Link to={'/shoppingbasket/'}>
-                <button>장바구니 보러가기</button>
-              </Link>
-            </div> */}
           </Btndiv>
         </Content>
       </Container>

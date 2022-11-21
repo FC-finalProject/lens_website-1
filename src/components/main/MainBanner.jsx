@@ -7,7 +7,6 @@ import { Link } from 'react-router-dom';
 
 function MainBanner() {
   return (
-    //링크는 임시로.
     <Grid>
       <FirstItem className="one">
         <Link to="/">

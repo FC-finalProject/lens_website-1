@@ -1,4 +1,3 @@
-import { faRectangleAd } from '@fortawesome/free-solid-svg-icons';
 import React from 'react';
 import { useState } from 'react';
 import styled from 'styled-components';
@@ -24,9 +23,6 @@ function WrapDetail({ product, handleClick, id }) {
   const [countList, setCountList] = useState([1]);
 
   function handleCart(e) {
-    // setData({ ...data, frequency: e.target.innerText });
-    // window.localStorage.setItem('itemDetail', data);
-    //fre
     setFree([...free, e.target.innerText]);
     window.localStorage.setItem('fre', free);
     setOpenDiv(true);

@@ -13,12 +13,6 @@ export default function MyPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { status, error, data } = useGetUserInfor();
-  //useMutation 공부해서 사용해봅시다
-  // const {
-  //   data: {
-  //     data: { username, birthday, phone, gender, joinedAt },
-  //   },
-  // } = data;
   const { refetch } = useLogout();
 
   useEffect(() => {

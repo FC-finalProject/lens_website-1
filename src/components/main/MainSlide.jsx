@@ -1,14 +1,8 @@
-// Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
-
-// Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/pagination';
 import styled from 'styled-components';
-
-// import required modules
 import { Pagination } from 'swiper';
-
 import MainBanner from './MainBanner';
 
 export default function MainSlide() {
