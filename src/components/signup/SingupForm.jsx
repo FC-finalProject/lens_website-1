@@ -1,39 +1,57 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import { useForm } from 'react-hook-form';
+import { SignupConstant } from '../../utils/constant/SignupConstant';
+import { useCheckValidity } from '../../api/signupApi';
 import Button from '../login/Button';
-import CheckInputField from './CheckInputField';
-import GenderInputField from './GenderInputField';
-import PasswordInputField from './PasswordInputField';
 
-export default function SingupForm({ onSubmit, setUserInfor }) {
+export default function SingupForm() {
+  const {
+    register,
+    handleSubmit,
+    getValues,
+    formState: { errors },
+  } = useForm({
+    defaultValue: {
+      loginId: '',
+    },
+  });
+  const { refetch } = useCheckValidity('loginId', getValues('loginId'));
+
+  const onSubmit = (data) => {
+    console.log(data);
+  };
   return (
     <>
-      <InforBox noValidate onSubmit={onSubmit}>
-        <CheckInputField
-          title="아이디"
-          name="loginId"
-          setUserInfor={setUserInfor}
-        />
-        <CheckInputField
-          title="이메일"
-          name="email"
-          setUserInfor={setUserInfor}
-        />
+      <InforBox onSubmit={handleSubmit(onSubmit)}>
         <InforEach>
-          <Label>닉네임</Label>
+          <Label>{SignupConstant.CATEGORY.id}</Label>
           <InputField
-            type="text"
-            maxLength="20"
-            onChange={(e) => {
-              setUserInfor('username', e.target.value);
-            }}
+            {...register('loginId', {
+              minLength: {
+                value: 8,
+                message: SignupConstant.ERROR_MESSAGE.id_wrong_number,
+              },
+            })}
           />
+          <RepetitionCheckBtn
+            onClick={async (e) => {
+              e.preventDefault();
+              const data = await refetch();
+              console.log(getValues('loginId'));
+              console.log(errors.loginId?.message);
+
+              if (data.data.data.data.exists) {
+                console.log('이미 존재');
+              }
+            }}
+          >
+            {SignupConstant.CATEGORY.duplicate_check}
+          </RepetitionCheckBtn>
+          {errors.loginId && <p>{errors.loginId?.message}</p>}
         </InforEach>
-        <PasswordInputField setPasswordInfor={setUserInfor} />
-        <GenderInputField setGenderInfor={setUserInfor} />
-        <Button text="회원가입" onClick={onSubmit()} />
+        <Button value="submit"></Button>
       </InforBox>
-      {/* ///{false && <Popup message={popupMessage} show={setShowPopup} />} */}
     </>
   );
 }
@@ -69,4 +87,12 @@ export const InputField = styled.input.attrs({ requried: true })`
   ::-ms-clear {
     display: none;
   }
+`;
+const RepetitionCheckBtn = styled.button`
+  transform: translate(260px, -50px);
+  width: 72px;
+  height: 48px;
+  background-color: white;
+  border: 1px solid #dedede;
+  cursor: pointer;
 `;
