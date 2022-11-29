@@ -1,4 +1,4 @@
-export const LoginConstant = {
+const LoginConstant = {
   TITLE: {
     sub: '나만의 특별함을 위해 LENSSIS',
     main: '계정정보를 입력해주세요.',
@@ -22,3 +22,5 @@ export const LoginConstant = {
     go_to_find_info: '아이디/비밀번호 찾기',
   },
 };
+
+export default LoginConstant;

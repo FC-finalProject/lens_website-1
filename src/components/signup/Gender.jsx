@@ -1,23 +1,25 @@
 import React from 'react';
 import { InforEach, Label } from './SingupForm';
 import styled from 'styled-components';
+import { SignupConstant } from '../../utils/constant/SignupConstant';
 
-const GENER_LIST = ['Male', 'Female'];
+const GENER_LIST = ['M', 'F'];
 
-export default function GenderInputField({ setGenderInfor }) {
+export default function Gender({ register }) {
   return (
     <InforEach>
-      <Label>성별 ( 선택 )</Label>
+      <Label>
+        {SignupConstant.CATEGORY.gender}
+        {SignupConstant.CATEGORY.optional}
+      </Label>
       {GENER_LIST.map((gender) => (
         <RadioEach key={gender}>
-          <span>{gender === 'Male' ? '남성' : '여성'}</span>
+          <span>{gender === 'M' ? '남성' : '여성'}</span>
           <input
             type="radio"
             name="gender"
             value={gender}
-            onChange={(e) => {
-              setGenderInfor('gender', e.target.value.slice(0, 1));
-            }}
+            {...register('gender')}
           />
         </RadioEach>
       ))}

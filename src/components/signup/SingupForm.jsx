@@ -1,22 +1,21 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
-import { SignupConstant } from '../../utils/constant/SignupConstant';
-import { useCheckValidity } from '../../api/signupApi';
 import Button from '../login/Button';
+import LoginId from './LoginId';
+import Email from './Email';
+import Password from './Password';
+import Gender from './Gender';
 
 export default function SingupForm() {
   const {
-    register,
     handleSubmit,
-    getValues,
+    register,
     formState: { errors },
-  } = useForm({
-    defaultValue: {
-      loginId: '',
-    },
-  });
-  const { refetch } = useCheckValidity('loginId', getValues('loginId'));
+    setError,
+    getValues,
+    clearErrors,
+  } = useForm();
 
   const onSubmit = (data) => {
     console.log(data);
@@ -24,32 +23,16 @@ export default function SingupForm() {
   return (
     <>
       <InforBox onSubmit={handleSubmit(onSubmit)}>
-        <InforEach>
-          <Label>{SignupConstant.CATEGORY.id}</Label>
-          <InputField
-            {...register('loginId', {
-              minLength: {
-                value: 8,
-                message: SignupConstant.ERROR_MESSAGE.id_wrong_number,
-              },
-            })}
-          />
-          <RepetitionCheckBtn
-            onClick={async (e) => {
-              e.preventDefault();
-              const data = await refetch();
-              console.log(getValues('loginId'));
-              console.log(errors.loginId?.message);
-
-              if (data.data.data.data.exists) {
-                console.log('이미 존재');
-              }
-            }}
-          >
-            {SignupConstant.CATEGORY.duplicate_check}
-          </RepetitionCheckBtn>
-          {errors.loginId && <p>{errors.loginId?.message}</p>}
-        </InforEach>
+        <LoginId register={register} errors={errors} />
+        <Email register={register} errors={errors} />
+        <Password
+          register={register}
+          errors={errors}
+          setError={setError}
+          getValues={getValues}
+          clearErrors={clearErrors}
+        />
+        <Gender register={register} />
         <Button value="submit"></Button>
       </InforBox>
     </>
@@ -64,20 +47,18 @@ const InforBox = styled.form`
 export const InforEach = styled.div`
   display: flex;
   flex-direction: column;
-  margin-bottom: 40px;
+  padding: 20px 0;
 `;
 export const Label = styled.label`
   font-size: 14px;
   color: #606060;
-  padding-bottom: 15px;
+  padding-bottom: 10px;
 `;
 
 export const InputField = styled.input.attrs({ requried: true })`
   border: none;
   border-bottom: 2px solid #f0f0f0;
-  width: ${(props) => (props.short ? '238px' : '322px')};
-  height: 16px;
-  padding-bottom: 8px;
+  width: 300px;
 
   &:focus {
     outline: none;
@@ -88,11 +69,15 @@ export const InputField = styled.input.attrs({ requried: true })`
     display: none;
   }
 `;
-const RepetitionCheckBtn = styled.button`
-  transform: translate(260px, -50px);
+export const RepetitionCheckBtn = styled.button`
   width: 72px;
   height: 48px;
   background-color: white;
   border: 1px solid #dedede;
   cursor: pointer;
+`;
+
+export const ErrorMessage = styled.div`
+  width: 322px;
+  color: red;
 `;
