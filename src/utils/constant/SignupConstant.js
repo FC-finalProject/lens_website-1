@@ -11,12 +11,14 @@ export const SignupConstant = {
     email_wrong_form: '유효한 형식의 이메일이 아닙니다.',
     email_duplicate_check: '이메일 중복 확인 해주세요.',
     email_duplicate: '이미 존재하는 이메일입니다.',
-    password_wrong_form: '유효한 형식의 비밀번호가 아닙니다.',
+    password_wrong_form:
+      '비밀번호는 영문, 숫자, 특수기호로 이루어진 8글자 이상이여합니다.',
     password_not_match: '비밀번호가 일치하지 않습니다.',
     no_id: '아이디를 입력하세요.',
+    no_email: '이메일을 입력하세요.',
     no_username: '닉네임을 입력하세요.',
     no_password: '비밀번호를 입력하세요.',
-    fail_to_login: '존재하지 않는 아이디이거나 비밀번호가 틀립니다.',
+    phone_wrong_form: '올바른 형식의 전화번호가 아닙니다.',
   },
 
   MESSAGE: {
@@ -43,7 +45,7 @@ export const SignupConstant = {
   },
 
   GENDER: {
-    famale: '여성',
+    female: '여성',
     male: '남성',
   },
 
@@ -52,8 +54,8 @@ export const SignupConstant = {
     password: '',
     username: '',
     email: '',
-    phone: '',
-    birthday: '',
+    phone: '010-1111-1111',
+    birthday: '2000-01-01',
     gender: 'X',
   },
 };

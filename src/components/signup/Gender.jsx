@@ -14,12 +14,18 @@ export default function Gender({ register }) {
       </Label>
       {GENER_LIST.map((gender) => (
         <RadioEach key={gender}>
-          <span>{gender === 'M' ? '남성' : '여성'}</span>
+          <span>
+            {gender === 'M'
+              ? SignupConstant.GENDER.male
+              : SignupConstant.GENDER.female}
+          </span>
           <input
             type="radio"
             name="gender"
             value={gender}
-            {...register('gender')}
+            {...register('gender', {
+              setValueAs: (value) => value || 'X',
+            })}
           />
         </RadioEach>
       ))}

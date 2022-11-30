@@ -14,7 +14,6 @@ import { SignupConstant } from '../../utils/constant/SignupConstant';
 import Popup from '../common/Popup';
 
 export default function SingupForm() {
-  const [userInfo, setUserInfo] = useState(SignupConstant.default_value);
   const [showPopup, setShowPopup] = useState(false);
   const {
     handleSubmit,
@@ -24,17 +23,11 @@ export default function SingupForm() {
     getValues,
     clearErrors,
     watch,
-  } = useForm(userInfo);
-  const { refetch } = usePostUser(userInfo);
+  } = useForm(SignupConstant.default_value);
+  const { refetch } = usePostUser(getValues());
 
   const onSubmit = async (userInput) => {
     delete userInput.passwordCheck;
-    userInput.phone ||= '010-0000-0000';
-    userInput.birthday ||= '2000-01-10';
-    userInput.gender ||= 'X';
-
-    setUserInfo(userInput);
-    console.log(userInput);
     const { isSuccess } = await refetch();
     if (isSuccess) {
       setShowPopup(true);
@@ -56,7 +49,7 @@ export default function SingupForm() {
           setError={setError}
           clearErrors={clearErrors}
         />
-        <Username register={register} errors={errors} />
+        <Username register={register} />
         <Password
           register={register}
           errors={errors}
@@ -71,6 +64,7 @@ export default function SingupForm() {
         {showPopup && (
           <Popup message={SignupConstant.MESSAGE.success} show={setShowPopup} />
         )}
+        {/* {errors && console.log(errors)} */}
       </InforBox>
     </>
   );

@@ -17,7 +17,10 @@ export default function Password({
         <InputField
           type="password"
           {...register('password', {
-            required: true,
+            required: {
+              value: true,
+              message: SignupConstant.ERROR_MESSAGE.no_password,
+            },
             maxLength: 25,
             pattern: {
               value: PW_REG,
