@@ -3,7 +3,13 @@ import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
 import { SignupConstant } from '../../utils/constant/SignupConstant';
 import { EMAIL_REG } from '../../utils/reg';
-import { InforEach, Label, InputField, RepetitionCheckBtn } from './SingupForm';
+import {
+  InforEach,
+  Label,
+  InputField,
+  RepetitionCheckBtn,
+  ErrorMessage,
+} from './SingupForm';
 
 export default function Email({ register, errors }) {
   return (
@@ -29,7 +35,7 @@ export default function Email({ register, errors }) {
           </RepetitionCheckBtn>
         </InputBox>
       </InforEach>
-      {errors.email && errors.email.message}
+      <ErrorMessage>{errors.email && errors.email.message}</ErrorMessage>
     </>
   );
 }
