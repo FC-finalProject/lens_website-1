@@ -8,7 +8,8 @@ import { InforEach, Label, InputField, RepetitionCheckBtn } from './SingupForm';
 export default function LoginId({ register, watch, setError, clearErrors }) {
   const [showPopup, setShowPopup] = useState(false);
   const [message, setMessage] = useState('');
-  const { refetch } = useCheckValidity('loginId', watch('loginId'));
+  const loginId = watch('loginId');
+  const { refetch } = useCheckValidity('loginId', loginId);
   return (
     <>
       <InforEach>
@@ -17,21 +18,22 @@ export default function LoginId({ register, watch, setError, clearErrors }) {
           <InputField
             {...register('loginId', {
               required: true,
-              minLength: {
-                value: 8,
-                message: SignupConstant.ERROR_MESSAGE.id_wrong_number,
-              },
+              minLength: 8,
             })}
           />
           <RepetitionCheckBtn
             onClick={async () => {
-              const { data } = await refetch();
-              if (data.data.data.exists) {
-                setMessage(SignupConstant.ERROR_MESSAGE.id_ducplicate);
-                setError('loginId', { type: 'custom' });
+              if (loginId.length < 8) {
+                setMessage(SignupConstant.ERROR_MESSAGE.id_wrong_number);
               } else {
-                setMessage(SignupConstant.MESSAGE.id_usable);
-                clearErrors('loginId');
+                const { data } = await refetch();
+                if (data.data.data.exists) {
+                  setMessage(SignupConstant.ERROR_MESSAGE.id_ducplicate);
+                  setError('loginId', { type: 'custom' });
+                } else {
+                  setMessage(SignupConstant.MESSAGE.id_usable);
+                  clearErrors('loginId');
+                }
               }
               setShowPopup(true);
             }}

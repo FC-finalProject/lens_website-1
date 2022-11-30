@@ -9,7 +9,8 @@ import { InforEach, Label, InputField, RepetitionCheckBtn } from './SingupForm';
 export default function Email({ register, watch, setError, clearErrors }) {
   const [showPopup, setShowPopup] = useState(false);
   const [message, setMessage] = useState('');
-  const { refetch } = useCheckValidity('email', watch('email'));
+  const email = watch('email');
+  const { refetch } = useCheckValidity('email', email);
 
   return (
     <>
@@ -19,23 +20,24 @@ export default function Email({ register, watch, setError, clearErrors }) {
           <InputField
             {...register('email', {
               required: true,
-              pattern: {
-                value: EMAIL_REG,
-                message: SignupConstant.ERROR_MESSAGE.email_wrong_form,
-              },
+              pattern: EMAIL_REG,
             })}
           />
           <RepetitionCheckBtn
             onClick={async () => {
-              const { data } = await refetch();
-              if (data.data.data.exists) {
-                setMessage(SignupConstant.ERROR_MESSAGE.email_duplicate);
-                console.log(message);
-                setError('email', { type: 'custom' });
+              if (!EMAIL_REG.test(email)) {
+                setMessage(SignupConstant.ERROR_MESSAGE.email_wrong_form);
               } else {
-                setMessage(SignupConstant.MESSAGE.email_usable);
-                clearErrors('email');
-                console.log(message);
+                const { data } = await refetch();
+                if (data.data.data.exists) {
+                  setMessage(SignupConstant.ERROR_MESSAGE.email_duplicate);
+                  console.log(message);
+                  setError('email', { type: 'custom' });
+                } else {
+                  setMessage(SignupConstant.MESSAGE.email_usable);
+                  clearErrors('email');
+                  console.log(message);
+                }
               }
               setShowPopup(true);
             }}
