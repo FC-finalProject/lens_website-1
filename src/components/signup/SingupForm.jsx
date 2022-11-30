@@ -6,6 +6,8 @@ import LoginId from './LoginId';
 import Email from './Email';
 import Password from './Password';
 import Gender from './Gender';
+import Phone from './Phone';
+import Username from './Username';
 
 export default function SingupForm() {
   const {
@@ -25,6 +27,7 @@ export default function SingupForm() {
       <InforBox onSubmit={handleSubmit(onSubmit)}>
         <LoginId register={register} errors={errors} />
         <Email register={register} errors={errors} />
+        <Username register={register} errors={errors} />
         <Password
           register={register}
           errors={errors}
@@ -32,6 +35,7 @@ export default function SingupForm() {
           getValues={getValues}
           clearErrors={clearErrors}
         />
+        <Phone register={register} errors={errors} />
         <Gender register={register} />
         <Button value="submit"></Button>
       </InforBox>
