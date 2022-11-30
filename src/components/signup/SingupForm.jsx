@@ -8,6 +8,7 @@ import Password from './Password';
 import Gender from './Gender';
 import Phone from './Phone';
 import Username from './Username';
+import Birthday from './Birthday';
 
 export default function SingupForm() {
   const {
@@ -36,6 +37,7 @@ export default function SingupForm() {
           clearErrors={clearErrors}
         />
         <Phone register={register} errors={errors} />
+        <Birthday register={register} />
         <Gender register={register} />
         <Button value="submit"></Button>
       </InforBox>
