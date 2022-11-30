@@ -11,15 +11,14 @@ export default function Popup({ message, show }) {
 
   useEffect(() => {
     const exit = (e) => {
-      console.log(e.key);
       if (e.key === 'Escape') {
         show(false);
       }
     };
     window.addEventListener('keyup', exit);
 
-    return window.removeEventListener('keyup', exit);
-  }, []);
+    return () => window.removeEventListener('keyup', exit);
+  }, [show]);
 
   return (
     <PopupBackDrop
