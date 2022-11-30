@@ -9,8 +9,10 @@ import Gender from './Gender';
 import Phone from './Phone';
 import Username from './Username';
 import Birthday from './Birthday';
+import { usePostUser } from '../../api/signupApi';
 
 export default function SingupForm() {
+  const [userInfo, setUserInfo] = useState({});
   const {
     handleSubmit,
     register,
@@ -18,16 +20,33 @@ export default function SingupForm() {
     setError,
     getValues,
     clearErrors,
+    watch,
   } = useForm();
+  const { refetch } = usePostUser(userInfo);
 
-  const onSubmit = (data) => {
+  const onSubmit = async (userInput) => {
+    delete userInput.passwordCheck;
+    console.log(userInput);
+    setUserInfo(userInput);
+    const { data } = await refetch();
     console.log(data);
   };
+
   return (
     <>
       <InforBox onSubmit={handleSubmit(onSubmit)}>
-        <LoginId register={register} errors={errors} />
-        <Email register={register} errors={errors} />
+        <LoginId
+          register={register}
+          watch={watch}
+          setError={setError}
+          clearErrors={clearErrors}
+        />
+        <Email
+          register={register}
+          watch={watch}
+          setError={setError}
+          clearErrors={clearErrors}
+        />
         <Username register={register} errors={errors} />
         <Password
           register={register}
@@ -39,7 +58,7 @@ export default function SingupForm() {
         <Phone register={register} errors={errors} />
         <Birthday register={register} />
         <Gender register={register} />
-        <Button value="submit"></Button>
+        <Button text="회원가입하기"></Button>
       </InforBox>
     </>
   );
