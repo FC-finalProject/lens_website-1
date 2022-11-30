@@ -46,4 +46,14 @@ export const SignupConstant = {
     famale: '여성',
     male: '남성',
   },
+
+  default_value: {
+    loginId: '',
+    password: '',
+    username: '',
+    email: '',
+    phone: '',
+    birthday: '',
+    gender: 'X',
+  },
 };

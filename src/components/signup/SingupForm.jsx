@@ -10,9 +10,12 @@ import Phone from './Phone';
 import Username from './Username';
 import Birthday from './Birthday';
 import { usePostUser } from '../../api/signupApi';
+import { SignupConstant } from '../../utils/constant/SignupConstant';
+import Popup from '../common/Popup';
 
 export default function SingupForm() {
-  const [userInfo, setUserInfo] = useState({});
+  const [userInfo, setUserInfo] = useState(SignupConstant.default_value);
+  const [showPopup, setShowPopup] = useState(false);
   const {
     handleSubmit,
     register,
@@ -21,15 +24,21 @@ export default function SingupForm() {
     getValues,
     clearErrors,
     watch,
-  } = useForm();
+  } = useForm(userInfo);
   const { refetch } = usePostUser(userInfo);
 
   const onSubmit = async (userInput) => {
     delete userInput.passwordCheck;
-    console.log(userInput);
+    userInput.phone ||= '010-0000-0000';
+    userInput.birthday ||= '2000-01-10';
+    userInput.gender ||= 'X';
+
     setUserInfo(userInput);
-    const { data } = await refetch();
-    console.log(data);
+    console.log(userInput);
+    const { isSuccess } = await refetch();
+    if (isSuccess) {
+      setShowPopup(true);
+    }
   };
 
   return (
@@ -59,6 +68,9 @@ export default function SingupForm() {
         <Birthday register={register} />
         <Gender register={register} />
         <Button text="회원가입하기"></Button>
+        {showPopup && (
+          <Popup message={SignupConstant.MESSAGE.success} show={setShowPopup} />
+        )}
       </InforBox>
     </>
   );
