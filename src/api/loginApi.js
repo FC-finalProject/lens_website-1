@@ -9,7 +9,7 @@ const config = {
   manual: true,
 };
 
-const sendLoginInfo = (loginInfor) => () =>
+export const sendLoginInfo = (loginInfor) =>
   axios.post('/login', JSON.stringify(loginInfor), {
     headers: header,
   });

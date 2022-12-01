@@ -5,6 +5,7 @@ import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import Button from '../login/Button';
 import { useNavigate } from 'react-router';
 import { useEffect } from 'react';
+import { SignupConstant } from '../../utils/constant/SignupConstant';
 
 export default function Popup({ message, show }) {
   const navigate = useNavigate();
@@ -39,8 +40,8 @@ export default function Popup({ message, show }) {
           text="확인"
           onClick={() => {
             show(false);
-            if (message === '회원가입에 성공했습니다.') {
-              navigate('/');
+            if (message === SignupConstant.MESSAGE.success) {
+              navigate('/login');
             }
           }}
         />

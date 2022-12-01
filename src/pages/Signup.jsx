@@ -1,12 +1,7 @@
 import React from 'react';
-import { useState } from 'react';
 import styled from 'styled-components';
 import Title from '../components/login/Title';
 import SingupForm from '../components/signup/SingupForm';
-import Popup from '../components/common/Popup';
-import { usePostUser } from '../api/signupApi';
-import { validation } from '../utils/validation';
-import { useNavigate } from 'react-router';
 import { SignupConstant } from '../utils/constant/SignupConstant';
 
 export default function Signup() {
