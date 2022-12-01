@@ -5,8 +5,6 @@ import styled from 'styled-components';
 function DetailSection({ product, handleClick }) {
   return (
     <Container>
-      {/* <Btn>제품 상세설명</Btn>
-      <Btn>리뷰(100)</Btn> */}
       <GnbLists>
         <GnbItem>
           <NavLink exact to="/itemDetail" className={'active'}>
@@ -14,14 +12,6 @@ function DetailSection({ product, handleClick }) {
           </NavLink>
         </GnbItem>
         <GnbItem>
-          {/* <NavLink
-            // exact
-            // to="/itemList"
-            // activeClassName="active"
-            onClick={handleClick}
-          >
-            리뷰(100)
-          </NavLink> */}
           <span onClick={handleClick}>리뷰(100)</span>
         </GnbItem>
       </GnbLists>

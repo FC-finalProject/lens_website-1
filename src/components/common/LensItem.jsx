@@ -34,7 +34,7 @@ const StyledLink = styled(Link)`
 `;
 
 const IMG = styled.img`
-  weight: 220px;
+  width: 220px;
   height: 220px;
   margin: 0;
 `;

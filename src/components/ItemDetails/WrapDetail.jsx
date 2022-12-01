@@ -1,4 +1,3 @@
-import { faRectangleAd } from '@fortawesome/free-solid-svg-icons';
 import React from 'react';
 import { useState } from 'react';
 import styled from 'styled-components';
@@ -24,9 +23,6 @@ function WrapDetail({ product, handleClick, id }) {
   const [countList, setCountList] = useState([1]);
 
   function handleCart(e) {
-    // setData({ ...data, frequency: e.target.innerText });
-    // window.localStorage.setItem('itemDetail', data);
-    //fre
     setFree([...free, e.target.innerText]);
     window.localStorage.setItem('fre', free);
     setOpenDiv(true);
@@ -146,7 +142,6 @@ const Container = styled.div`
   width: 40%;
   height: 100%;
   float: right;
-  font-family: 'Noto Sans JP';
   font-style: normal;
   .p1 {
     font-weight: 400;
@@ -204,7 +199,6 @@ const Graphicdiameterbtn = styled.button`
   border: 1px solid #d3d6db;
   border-radius: 4px;
   cursor: pointer;
-
   opacity: 1;
   transition: 0.3s;
   :hover {

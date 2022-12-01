@@ -4,9 +4,22 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import Button from '../login/Button';
 import { useNavigate } from 'react-router';
+import { useEffect } from 'react';
 
 export default function Popup({ message, show }) {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const exit = (e) => {
+      if (e.key === 'Escape') {
+        show(false);
+      }
+    };
+    window.addEventListener('keyup', exit);
+
+    return () => window.removeEventListener('keyup', exit);
+  }, [show]);
+
   return (
     <PopupBackDrop
       onClick={() => {

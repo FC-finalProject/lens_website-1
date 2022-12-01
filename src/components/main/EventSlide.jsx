@@ -1,14 +1,10 @@
-// Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
-
-// Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/pagination';
 import styled from 'styled-components';
-
-// import required modules
 import { Pagination } from 'swiper';
 import { EventSlideList } from '../../static/data/EventSlide';
+
 export default function EventSlide() {
   return (
     <Container>
@@ -16,7 +12,6 @@ export default function EventSlide() {
         slidesPerView={3}
         spaceBetween={16}
         slidesPerGroup={1}
-        // centeredSlides={true}
         loop={true}
         loopFillGroupWithBlank={true}
         pagination={{

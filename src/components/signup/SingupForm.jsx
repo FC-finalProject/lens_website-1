@@ -1,39 +1,65 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import { useForm } from 'react-hook-form';
 import Button from '../login/Button';
-import CheckInputField from './CheckInputField';
-import GenderInputField from './GenderInputField';
-import PasswordInputField from './PasswordInputField';
+import LoginId from './LoginId';
+import Email from './Email';
+import Password from './Password';
+import Gender from './Gender';
+import Phone from './Phone';
+import Username from './Username';
+import Birthday from './Birthday';
+import { usePostUser } from '../../api/signupApi';
 
-export default function SingupForm({ onSubmit, setUserInfor }) {
+export default function SingupForm() {
+  const [userInfo, setUserInfo] = useState({});
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+    setError,
+    getValues,
+    clearErrors,
+    watch,
+  } = useForm();
+  const { refetch } = usePostUser(userInfo);
+
+  const onSubmit = async (userInput) => {
+    delete userInput.passwordCheck;
+    console.log(userInput);
+    setUserInfo(userInput);
+    const { data } = await refetch();
+    console.log(data);
+  };
+
   return (
     <>
-      <InforBox noValidate onSubmit={onSubmit}>
-        <CheckInputField
-          title="아이디"
-          name="loginId"
-          setUserInfor={setUserInfor}
+      <InforBox onSubmit={handleSubmit(onSubmit)}>
+        <LoginId
+          register={register}
+          watch={watch}
+          setError={setError}
+          clearErrors={clearErrors}
         />
-        <CheckInputField
-          title="이메일"
-          name="email"
-          setUserInfor={setUserInfor}
+        <Email
+          register={register}
+          watch={watch}
+          setError={setError}
+          clearErrors={clearErrors}
         />
-        <InforEach>
-          <Label>닉네임</Label>
-          <InputField
-            type="text"
-            maxLength="20"
-            onChange={(e) => {
-              setUserInfor('username', e.target.value);
-            }}
-          />
-        </InforEach>
-        <PasswordInputField setPasswordInfor={setUserInfor} />
-        <GenderInputField setGenderInfor={setUserInfor} />
-        <Button text="회원가입" onClick={onSubmit()} />
+        <Username register={register} errors={errors} />
+        <Password
+          register={register}
+          errors={errors}
+          setError={setError}
+          getValues={getValues}
+          clearErrors={clearErrors}
+        />
+        <Phone register={register} errors={errors} />
+        <Birthday register={register} />
+        <Gender register={register} />
+        <Button text="회원가입하기"></Button>
       </InforBox>
-      {/* ///{false && <Popup message={popupMessage} show={setShowPopup} />} */}
     </>
   );
 }
@@ -46,20 +72,18 @@ const InforBox = styled.form`
 export const InforEach = styled.div`
   display: flex;
   flex-direction: column;
-  margin-bottom: 40px;
+  padding: 20px 0;
 `;
 export const Label = styled.label`
   font-size: 14px;
   color: #606060;
-  padding-bottom: 15px;
+  padding-bottom: 10px;
 `;
 
 export const InputField = styled.input.attrs({ requried: true })`
   border: none;
   border-bottom: 2px solid #f0f0f0;
-  width: ${(props) => (props.short ? '238px' : '322px')};
-  height: 16px;
-  padding-bottom: 8px;
+  width: 300px;
 
   &:focus {
     outline: none;
@@ -69,4 +93,16 @@ export const InputField = styled.input.attrs({ requried: true })`
   ::-ms-clear {
     display: none;
   }
+`;
+export const RepetitionCheckBtn = styled.button`
+  width: 72px;
+  height: 48px;
+  background-color: white;
+  border: 1px solid #dedede;
+  cursor: pointer;
+`;
+
+export const ErrorMessage = styled.div`
+  width: 322px;
+  color: red;
 `;

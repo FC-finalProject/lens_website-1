@@ -9,6 +9,7 @@ export const userLoginInforSlice = createSlice({
   initialState,
   reducers: {
     setLogIn: (state, action) => {
+      console.log(action.payload);
       state.isLogin = action.payload.login;
     },
   },
